@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx7i7d4gwys0i"]
+
+[ext_resource type="Script" path="res://scenes/robots/base/robot.gd" id="1_lal1p"]
+[ext_resource type="Texture2D" uid="uid://bb0f1rujlif2e" path="res://icon.svg" id="1_t6wy7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lsnu"]
+size = Vector2(63, 100)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fbpty"]
+radius = 256.5
+
+[node name="Robot" type="CharacterBody2D" groups=["robot"]]
+collision_layer = 2
+script = ExtResource("1_lal1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_0lsnu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0.4, 1)
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.5, 0.789063)
+texture = ExtResource("1_t6wy7")
+
+[node name="RecognitionRadar" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RecognitionRadar"]
+position = Vector2(-21, 0)
+rotation = -3.14159
+scale = Vector2(0.75, 1)
+polygon = PackedVector2Array(-1, -1, -401, -98, -401, 56)
+
+[node name="DerecognitionRadar" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DerecognitionRadar"]
+shape = SubResource("CircleShape2D_fbpty")
+debug_color = Color(0.419608, 0.603922, 0, 0.419608)
+
+[node name="PauseTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
+[connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
+[connection signal="body_exited" from="DerecognitionRadar" to="." method="_on_radar_body_exited"]

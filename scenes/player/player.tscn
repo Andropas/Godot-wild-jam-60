@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gus1"]
 size = Vector2(79, 124)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_6tx37")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,9 +23,14 @@ wait_time = 0.25
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_top = 0
-limit_bottom = 650
+offset = Vector2(0, -78.155)
+limit_top = -155
+limit_bottom = 975
 position_smoothing_speed = 2.0
+drag_vertical_enabled = true
+drag_top_margin = 0.03
+drag_bottom_margin = 0.52
 editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [connection signal="changed_facing" from="." to="." method="_on_changed_facing"]
