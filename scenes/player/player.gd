@@ -6,15 +6,14 @@ const JUMP_VELOCITY = -400.0
 
 signal changed_facing(x_value: int)
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_timer = $JumpTimer
 @onready var camera = $Camera2D
 
-const CAMERA_SPEED = 160
+const CAMERA_SPEED = 130
 
 signal new_camera_tween
-#var last_x_value = 1
 
 
 func _physics_process(delta):
@@ -39,7 +38,6 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	#camera.offset.x = velocity.x
 
 	move_and_slide()
 
@@ -48,6 +46,7 @@ func call_kill(node, args):
 
 func _on_changed_facing(x_value):
 	emit_signal("new_camera_tween")
-	var camera_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_LINEAR)
-	camera_tween.tween_property(camera, "offset", x_value*Vector2(CAMERA_SPEED, 0), 0.8*abs(x_value*CAMERA_SPEED - camera.offset.x)/CAMERA_SPEED)
+	var camera_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_QUAD)
+	camera_tween.tween_property(camera, "offset", x_value*Vector2(CAMERA_SPEED, 0),
+	1*abs(x_value*CAMERA_SPEED - camera.offset.x)/CAMERA_SPEED)
 	connect("new_camera_tween", camera_tween.kill)

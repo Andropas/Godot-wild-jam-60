@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=6 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
+[ext_resource type="PackedScene" uid="uid://cx7i7d4gwys0i" path="res://scenes/robots/base/robot.tscn" id="3_rryok"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6yysq"]
 size = Vector2(997, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwi3v"]
+size = Vector2(541.5, 74)
 
 [node name="Main" type="Node2D"]
 
@@ -21,5 +25,22 @@ position = Vector2(103, 478)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground"]
 position = Vector2(447, 604)
 shape = SubResource("RectangleShape2D_6yysq")
+
+[node name="Ground3" type="StaticBody2D" parent="Game/Street"]
+position = Vector2(104, -283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground3"]
+position = Vector2(1543, 795)
+shape = SubResource("RectangleShape2D_wwi3v")
+
+[node name="Ground2" type="StaticBody2D" parent="Game/Street"]
+position = Vector2(292, -66)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground2"]
+position = Vector2(447, 604)
+shape = SubResource("RectangleShape2D_6yysq")
+
+[node name="Robot" parent="Game/Street" instance=ExtResource("3_rryok")]
+position = Vector2(991, 381)
 
 [node name="UI" type="Node2D" parent="."]
