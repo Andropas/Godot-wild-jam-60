@@ -28,7 +28,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RecognitionRadar"]
-position = Vector2(-21, 0)
+position = Vector2(-69, 0)
 rotation = -3.14159
 scale = Vector2(0.75, 1)
 polygon = PackedVector2Array(-1, -1, -401, -98, -401, 56)
@@ -42,8 +42,10 @@ shape = SubResource("CircleShape2D_fbpty")
 debug_color = Color(0.419608, 0.603922, 0, 0.419608)
 
 [node name="PauseTimer" type="Timer" parent="."]
+wait_time = 0.8
 one_shot = true
 
 [connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
 [connection signal="body_exited" from="DerecognitionRadar" to="." method="_on_radar_body_exited"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
