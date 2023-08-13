@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_wwi3v")
 position = Vector2(292, -66)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground2"]
-position = Vector2(447, 604)
+position = Vector2(1146, 670)
 shape = SubResource("RectangleShape2D_6yysq")
 
 [node name="Robot" parent="Game/Street" instance=ExtResource("3_rryok")]

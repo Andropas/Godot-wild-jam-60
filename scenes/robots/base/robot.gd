@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 
-const SPEED = 100
+const SPEED = 250
 var direction = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var target_groups = ["player"]
 var target
+@onready var target_pos = position
 
 @onready var pause_timer = $PauseTimer
 @onready var derecognition = $DerecognitionRadar
@@ -20,12 +21,15 @@ func _physics_process(delta):
 
 	if not pause_timer.time_left:
 		direction = 0
-		if target:
-			direction = sign(target.position.x - position.x)
-		velocity.x = direction*SPEED
-		
+		if abs(target_pos.x - position.x) > 5:
+				direction = sign(target_pos.x - position.x)
+		elif target:
+			print(target)
+			pause_timer.start()
+			
 	else:
-		velocity.x = 0
+		direction = 0
+	velocity.x = direction*SPEED
 	if velocity.x:
 			scale.x = scale.y*sign(velocity.x)
 		
@@ -36,6 +40,7 @@ func _on_radar_body_entered(body):
 	for g in target_groups:
 		if body.is_in_group(g):
 			target = body
+			break
 
 
 func _on_radar_body_exited(body):
@@ -46,3 +51,10 @@ func _on_radar_body_exited(body):
 func _on_recognition_body_exited(body):
 	if body == target and not body in derecognition.get_overlapping_bodies():
 		target = null
+
+func update_target():
+	if target:
+		target_pos = target.position + Vector2(sign(target.position.x - position.x), 0)*120
+
+func _on_pause_timer_timeout():
+	update_target()
