@@ -24,7 +24,7 @@ func _physics_process(delta):
 		if abs(target_pos.x - position.x) > 5:
 				direction = sign(target_pos.x - position.x)
 		elif target:
-			print(target)
+			recognition.monitoring = false
 			pause_timer.start()
 			
 	else:
@@ -57,4 +57,13 @@ func update_target():
 		target_pos = target.position + Vector2(sign(target.position.x - position.x), 0)*120
 
 func _on_pause_timer_timeout():
+	recognition.monitoring = true
 	update_target()
+
+
+func _on_damage_area_body_entered(body):
+	for g in target_groups:
+		if body.is_in_group(g):
+			if body.has_method("take_damage"):
+				body.take_damage(1, Vector2(direction*300, -300), 0.5)
+			break

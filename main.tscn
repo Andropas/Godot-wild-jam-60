@@ -18,29 +18,30 @@ size = Vector2(541.5, 74)
 script = ExtResource("1_xfvs2")
 
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
-position = Vector2(103, 478)
+position = Vector2(103, 685)
 
 [node name="Ground" type="StaticBody2D" parent="Game/Street"]
+position = Vector2(0, 207)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground"]
 position = Vector2(447, 604)
 shape = SubResource("RectangleShape2D_6yysq")
 
 [node name="Ground3" type="StaticBody2D" parent="Game/Street"]
-position = Vector2(104, -283)
+position = Vector2(825, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground3"]
 position = Vector2(1543, 795)
 shape = SubResource("RectangleShape2D_wwi3v")
 
 [node name="Ground2" type="StaticBody2D" parent="Game/Street"]
-position = Vector2(292, -66)
+position = Vector2(292, 141)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/Ground2"]
 position = Vector2(1146, 670)
 shape = SubResource("RectangleShape2D_6yysq")
 
 [node name="Robot" parent="Game/Street" instance=ExtResource("3_rryok")]
-position = Vector2(991, 381)
+position = Vector2(991, 686)
 
 [node name="UI" type="Node2D" parent="."]
