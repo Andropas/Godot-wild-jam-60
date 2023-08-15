@@ -13,6 +13,7 @@ var target
 @onready var pause_timer = $PauseTimer
 @onready var derecognition = $DerecognitionRadar
 @onready var recognition = $RecognitionRadar
+@onready var damage_area = $DamageArea
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -24,7 +25,8 @@ func _physics_process(delta):
 		if abs(target_pos.x - position.x) > 5:
 				direction = sign(target_pos.x - position.x)
 		elif target:
-			recognition.monitoring = false
+			#recognition.monitoring = false
+			damage_area.monitoring = false
 			pause_timer.start()
 			
 	else:
@@ -44,7 +46,7 @@ func _on_radar_body_entered(body):
 
 
 func _on_radar_body_exited(body):
-	if body == target and not body in recognition.get_overlapping_bodies():
+	if body == target:
 		target = null
 
 
@@ -57,7 +59,7 @@ func update_target():
 		target_pos = target.position + Vector2(sign(target.position.x - position.x), 0)*120
 
 func _on_pause_timer_timeout():
-	recognition.monitoring = true
+	damage_area.monitoring = true
 	update_target()
 
 

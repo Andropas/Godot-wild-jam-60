@@ -4,7 +4,10 @@ uniform vec4 modulate: source_color;
 
 void fragment() {
 	COLOR = texture(TEXTURE, UV);
-	COLOR.a -= modulate.a;
-	COLOR.rgb += modulate.rgb*modulate.a;
-	COLOR.a = 1.0;
+	if (COLOR.a != 0.0) {
+		COLOR.rgb *=  1.0 - modulate.a;
+		COLOR.rgb += modulate.rgb*modulate.a;
+	}
+	
+	
 }

@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cb2uapysovubd"]
+
+[ext_resource type="Script" path="res://scenes/newspapers/news.gd" id="1_lc4q5"]
+[ext_resource type="Texture2D" uid="uid://bq1vppcwrr14r" path="res://textures/newspaper/sprite.png" id="1_ud8jb"]
+[ext_resource type="PackedScene" uid="uid://c2xnugjog0thv" path="res://scenes/newspapers/newspaper_template.tscn" id="3_86tc2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqssy"]
+size = Vector2(36, 40)
+
+[sub_resource type="Animation" id="Animation_wfh8j"]
+resource_name = "show_news"
+
+[sub_resource type="Animation" id="Animation_lelnn"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lk0ge"]
+_data = {
+"RESET": SubResource("Animation_lelnn"),
+"show_news": SubResource("Animation_wfh8j")
+}
+
+[node name="News" type="Area2D"]
+texture_filter = 1
+position = Vector2(478, 832)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_lc4q5")
+Template = ExtResource("3_86tc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_ud8jb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 12)
+shape = SubResource("RectangleShape2D_bqssy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lk0ge")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -29,6 +29,7 @@ texture = ExtResource("1_t6wy7")
 [node name="RecognitionRadar" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
+monitoring = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RecognitionRadar"]
 position = Vector2(-69, 0)
@@ -51,6 +52,7 @@ one_shot = true
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource("RectangleShape2D_31uiu")
@@ -58,6 +60,7 @@ debug_color = Color(1, 0.275593, 0.197752, 0.42)
 
 [connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
+[connection signal="body_entered" from="DerecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="DerecognitionRadar" to="." method="_on_radar_body_exited"]
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
