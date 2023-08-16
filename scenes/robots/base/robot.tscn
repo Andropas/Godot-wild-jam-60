@@ -1,13 +1,141 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx7i7d4gwys0i"]
+[gd_scene load_steps=11 format=3 uid="uid://cx7i7d4gwys0i"]
 
 [ext_resource type="Script" path="res://scenes/robots/base/robot.gd" id="1_lal1p"]
 [ext_resource type="Texture2D" uid="uid://bb0f1rujlif2e" path="res://icon.svg" id="1_t6wy7"]
+[ext_resource type="FontFile" uid="uid://qc80f4pcrlln" path="res://fonts/GlasstownNbpRegular-RyMM.ttf" id="3_mpvx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lsnu"]
 size = Vector2(63, 100)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fbpty"]
 radius = 256.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31uiu"]
+size = Vector2(60, 98)
+
+[sub_resource type="Animation" id="Animation_eep54"]
+resource_name = "found_target"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Emotion:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["!", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Emotion:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.843137, 0.2, 0.203922, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Emotion:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hje5i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Emotion:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Emotion:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Emotion:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lf0bu"]
+resource_name = "lost_target"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Emotion:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["?", ""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Emotion:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.839216, 0.466667, 0.168627, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Emotion:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e0vt6"]
+_data = {
+"RESET": SubResource("Animation_hje5i"),
+"found_target": SubResource("Animation_eep54"),
+"lost_target": SubResource("Animation_lf0bu")
+}
 
 [node name="Robot" type="CharacterBody2D" groups=["robot"]]
 collision_layer = 2
@@ -17,15 +145,16 @@ script = ExtResource("1_lal1p")
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0lsnu")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
 modulate = Color(1, 0, 0.4, 1)
-position = Vector2(0, 9.53674e-07)
+position = Vector2(0.5, 9.53674e-07)
 scale = Vector2(0.5, 0.789063)
 texture = ExtResource("1_t6wy7")
 
 [node name="RecognitionRadar" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
+monitoring = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RecognitionRadar"]
 position = Vector2(-69, 0)
@@ -45,7 +174,35 @@ debug_color = Color(0.419608, 0.603922, 0, 0.419608)
 wait_time = 0.8
 one_shot = true
 
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("RectangleShape2D_31uiu")
+debug_color = Color(1, 0.275593, 0.197752, 0.42)
+
+[node name="EmotionAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e0vt6")
+}
+
+[node name="Emotion" type="Label" parent="."]
+offset_left = -6.0
+offset_top = -115.0
+offset_right = 9.0
+offset_bottom = -48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.827451, 0.639216, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("3_mpvx6")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
+[connection signal="body_entered" from="DerecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="DerecognitionRadar" to="." method="_on_radar_body_exited"]
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
