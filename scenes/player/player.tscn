@@ -69,6 +69,7 @@ libraries = {
 }
 
 [node name="SafeTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [connection signal="changed_facing" from="." to="." method="_on_changed_facing"]

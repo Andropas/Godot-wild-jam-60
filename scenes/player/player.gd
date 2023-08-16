@@ -18,6 +18,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const CAMERA_SPEED = 130
 
 signal new_camera_tween
+signal changed_hp(hp)
 
 func take_damage(dmg, kickback = -1, stun = 0):
 	if not safe_timer.time_left:
@@ -26,8 +27,9 @@ func take_damage(dmg, kickback = -1, stun = 0):
 			velocity = kickback
 		stun_timer.start(stun)
 		effect_anim.play("hit")
-		safe_timer.start(0.5)
-		print(hit_points)
+		safe_timer.start(1.5)
+		emit_signal("changed_hp", hit_points)
+		#print(hit_points)
 	
 
 func _physics_process(delta):
