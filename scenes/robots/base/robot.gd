@@ -80,3 +80,6 @@ func _on_damage_area_body_entered(body):
 			if body.has_method("take_damage"):
 				body.take_damage(1, Vector2(direction*300, -300), 0.5)
 			break
+
+func die():
+	queue_free()

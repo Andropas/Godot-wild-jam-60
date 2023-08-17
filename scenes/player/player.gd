@@ -77,3 +77,6 @@ func _on_changed_facing(x_value):
 	camera_tween.tween_property(camera, "offset", x_value*Vector2(CAMERA_SPEED, 0),
 	1*abs(x_value*CAMERA_SPEED - camera.offset.x)/CAMERA_SPEED)
 	connect("new_camera_tween", camera_tween.kill)
+
+func die():
+	get_tree().reload_current_scene()

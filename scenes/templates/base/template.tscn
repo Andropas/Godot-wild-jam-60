@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc0ft21fwyok2"]
+
+[ext_resource type="Script" path="res://scenes/templates/base/template.gd" id="1_75tw8"]
+[ext_resource type="Texture2D" uid="uid://meo4n8h2x3c1" path="res://textures/house_middleground/0.png" id="1_x8q8n"]
+[ext_resource type="Texture2D" uid="uid://bkvp2xq5m5vgh" path="res://textures/house_middleground/1.png" id="2_etq62"]
+[ext_resource type="Texture2D" uid="uid://cjk4o8qv2tfj6" path="res://textures/house_background/0.png" id="3_6ws3s"]
+[ext_resource type="PackedScene" uid="uid://4xas3qxikm34" path="res://scenes/house_foreground/house.tscn" id="4_2qqvo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78kqs"]
+size = Vector2(1623, 84)
+
+[node name="Template" type="Node2D"]
+script = ExtResource("1_75tw8")
+
+[node name="Middleground" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+follow_viewport_scale = 0.5
+
+[node name="Street" type="Node2D" parent="Middleground"]
+texture_filter = 1
+scale = Vector2(2, 2)
+
+[node name="House2" type="Sprite2D" parent="Middleground/Street"]
+position = Vector2(882, 460)
+scale = Vector2(4, 4)
+texture = ExtResource("2_etq62")
+
+[node name="House4" type="Sprite2D" parent="Middleground/Street"]
+position = Vector2(278, 561)
+scale = Vector2(4, 4)
+texture = ExtResource("1_x8q8n")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enabled = true
+follow_viewport_scale = 0.25
+
+[node name="Street" type="Node2D" parent="Background"]
+texture_filter = 1
+scale = Vector2(4, 4)
+
+[node name="House2" type="Sprite2D" parent="Background/Street"]
+position = Vector2(1268, 561)
+scale = Vector2(4, 4)
+texture = ExtResource("3_6ws3s")
+
+[node name="House3" type="Sprite2D" parent="Background/Street"]
+position = Vector2(690, 213)
+scale = Vector2(4, 4)
+texture = ExtResource("3_6ws3s")
+
+[node name="House" parent="." instance=ExtResource("4_2qqvo")]
+
+[node name="House2" parent="." instance=ExtResource("4_2qqvo")]
+position = Vector2(1120, 1100)
+
+[node name="House3" parent="." instance=ExtResource("4_2qqvo")]
+position = Vector2(1788, 1011)
+
+[node name="FinishArea" type="Area2D" parent="."]
+position = Vector2(2169, 561)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea"]
+position = Vector2(-51, -22.5)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_78kqs")
+
+[connection signal="body_entered" from="FinishArea" to="." method="_on_finish_area_body_entered"]
