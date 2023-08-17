@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
+const SPEED = 300
 const JUMP_VELOCITY = -400.0
 
 signal changed_facing(x_value: int)
@@ -66,6 +66,7 @@ func _physics_process(delta):
 	anim_tree.set("parameters/conditions/is_moving", is_on_floor() and velocity.x != 0)
 	anim_tree.set("parameters/conditions/in_air", not is_on_floor())
 	anim_tree.set("parameters/in_air/blend_position", velocity.y - 150)
+	anim_tree.set("parameters/conditions/is_hurt", stun_timer.time_left)
 
 func call_kill(node, args):
 	node.kill()

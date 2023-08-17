@@ -18,6 +18,7 @@ var target
 
 @onready var emotion_anim = $EmotionAnim
 @onready var emotion = $Emotion
+@onready var anim_tree = $AnimationTree
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -40,6 +41,10 @@ func _physics_process(delta):
 			shape.scale.x = shape.scale.y*sign(velocity.x)
 		
 	move_and_slide()
+	
+	anim_tree.set("parameters/conditions/is_idle",is_on_floor() and velocity.x == 0)
+	anim_tree.set("parameters/conditions/is_moving", velocity.x != 0)
+	
 
 
 func _on_radar_body_entered(body):

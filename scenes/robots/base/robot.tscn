@@ -1,17 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx7i7d4gwys0i"]
+[gd_scene load_steps=21 format=3 uid="uid://cx7i7d4gwys0i"]
 
 [ext_resource type="Script" path="res://scenes/robots/base/robot.gd" id="1_lal1p"]
-[ext_resource type="Texture2D" uid="uid://bb0f1rujlif2e" path="res://icon.svg" id="1_t6wy7"]
+[ext_resource type="Texture2D" uid="uid://80p5vdy84gn0" path="res://textures/robot/pritesheet.png" id="2_nbqxs"]
 [ext_resource type="FontFile" uid="uid://qc80f4pcrlln" path="res://fonts/GlasstownNbpRegular-RyMM.ttf" id="3_mpvx6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lsnu"]
-size = Vector2(63, 100)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fbpty"]
 radius = 256.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31uiu"]
-size = Vector2(60, 98)
+size = Vector2(83, 89)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lsnu"]
+size = Vector2(48, 104)
 
 [sub_resource type="Animation" id="Animation_hje5i"]
 length = 0.001
@@ -137,19 +137,98 @@ _data = {
 "lost_target": SubResource("Animation_lf0bu")
 }
 
+[sub_resource type="Animation" id="Animation_6rr62"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pdxjt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l0s1o"]
+resource_name = "move"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yb0lc"]
+_data = {
+"RESET": SubResource("Animation_pdxjt"),
+"idle": SubResource("Animation_6rr62"),
+"move": SubResource("Animation_l0s1o")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iioq3"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lebf7"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iosl0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eil2x"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w8geb"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_l0fgb"]
+states/idle/node = SubResource("AnimationNodeAnimation_iioq3")
+states/idle/position = Vector2(329.333, 71.3333)
+states/move/node = SubResource("AnimationNodeAnimation_lebf7")
+states/move/position = Vector2(446.667, 134)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_iosl0"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_eil2x"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_w8geb")]
+
 [node name="Robot" type="CharacterBody2D" groups=["robot"]]
+texture_filter = 1
 collision_layer = 2
 script = ExtResource("1_lal1p")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_0lsnu")
+[node name="DerecognitionRadar" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
-modulate = Color(1, 0, 0.4, 1)
-position = Vector2(0.5, 9.53674e-07)
-scale = Vector2(0.5, 0.789063)
-texture = ExtResource("1_t6wy7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DerecognitionRadar"]
+shape = SubResource("CircleShape2D_fbpty")
+debug_color = Color(0.419608, 0.603922, 0, 0.419608)
 
 [node name="RecognitionRadar" type="Area2D" parent="."]
 collision_layer = 2
@@ -162,26 +241,31 @@ rotation = -3.14159
 scale = Vector2(0.75, 1)
 polygon = PackedVector2Array(-1, -1, -401, -98, -401, 56)
 
-[node name="DerecognitionRadar" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DerecognitionRadar"]
-shape = SubResource("CircleShape2D_fbpty")
-debug_color = Color(0.419608, 0.603922, 0, 0.419608)
-
-[node name="PauseTimer" type="Timer" parent="."]
-wait_time = 0.8
-one_shot = true
-
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(-11.5, 31.5)
 shape = SubResource("RectangleShape2D_31uiu")
 debug_color = Color(1, 0.275593, 0.197752, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 28)
+shape = SubResource("RectangleShape2D_0lsnu")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+position = Vector2(8, -28)
+scale = Vector2(4, 4)
+texture = ExtResource("2_nbqxs")
+hframes = 6
+vframes = 3
+frame = 6
+
+[node name="PauseTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
 
 [node name="EmotionAnim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -200,9 +284,21 @@ theme_override_fonts/font = ExtResource("3_mpvx6")
 theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 
-[connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
-[connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yb0lc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_l0fgb")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/conditions/is_idle = false
+parameters/conditions/is_moving = false
+
 [connection signal="body_entered" from="DerecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="DerecognitionRadar" to="." method="_on_radar_body_exited"]
-[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
+[connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
+[connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

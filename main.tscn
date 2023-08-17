@@ -35,6 +35,12 @@ position = Vector2(1788, 1011)
 [node name="Robot" parent="Game/Street" instance=ExtResource("3_rryok")]
 position = Vector2(1487, 686)
 
+[node name="Robot2" parent="Game/Street" instance=ExtResource("3_rryok")]
+position = Vector2(990, 779)
+
+[node name="Robot3" parent="Game/Street" instance=ExtResource("3_rryok")]
+position = Vector2(1924, 699)
+
 [node name="Middleground" type="CanvasLayer" parent="Game/Street"]
 layer = -1
 follow_viewport_enabled = true
