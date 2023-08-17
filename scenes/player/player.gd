@@ -10,6 +10,7 @@ var hit_points = 4
 @onready var stun_timer = $StunTimer
 @onready var safe_timer = $SafeTimer
 @onready var effect_anim = $EffectAnimationPlayer
+@onready var anim_tree = $AnimationTree
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_timer = $JumpTimer
@@ -58,8 +59,13 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if direction:
 			scale.x = scale.y*direction
-
+		
 	move_and_slide()
+	
+	anim_tree.set("parameters/conditions/is_idle", is_on_floor() and velocity.x == 0)
+	anim_tree.set("parameters/conditions/is_moving", is_on_floor() and velocity.x != 0)
+	anim_tree.set("parameters/conditions/in_air", not is_on_floor())
+	anim_tree.set("parameters/in_air/blend_position", velocity.y - 150)
 
 func call_kill(node, args):
 	node.kill()

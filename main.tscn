@@ -22,7 +22,7 @@ script = ExtResource("1_xfvs2")
 [node name="News" parent="Game/Street" instance=ExtResource("5_8pd3u")]
 
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
-position = Vector2(264, 832)
+position = Vector2(264, 752)
 
 [node name="House" parent="Game/Street" instance=ExtResource("3_diuo6")]
 
