@@ -8,7 +8,7 @@ var direction = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var target_groups = ["player"]
 var target
-@onready var target_pos = position
+@onready var target_pos = global_position
 
 @onready var pause_timer = $PauseTimer
 @onready var derecognition = $DerecognitionRadar
@@ -27,8 +27,8 @@ func _physics_process(delta):
 
 	if not pause_timer.time_left:
 		direction = 0
-		if abs(target_pos.x - position.x) > 5:
-				direction = sign(target_pos.x - position.x)
+		if abs(target_pos.x - global_position.x) > 5:
+				direction = sign(target_pos.x - global_position.x)
 		elif target:
 			#recognition.monitoring = false
 			damage_area.monitoring = false
@@ -67,7 +67,7 @@ func _on_recognition_body_exited(body):
 
 func update_target():
 	if target:
-		target_pos = target.position + Vector2(sign(target.position.x - position.x), 0)*120
+		target_pos = target.position + Vector2(sign(target.position.x - global_position.x), 0)*120
 
 func _on_pause_timer_timeout():
 	damage_area.monitoring = true

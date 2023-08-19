@@ -31,6 +31,8 @@ func take_damage(dmg, kickback = -1, stun = 0):
 		safe_timer.start(1.5)
 		emit_signal("changed_hp", hit_points)
 		#print(hit_points)
+		if hit_points <= 0:
+			die()
 	
 
 func _physics_process(delta):

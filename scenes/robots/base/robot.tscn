@@ -223,6 +223,7 @@ collision_layer = 2
 script = ExtResource("1_lal1p")
 
 [node name="DerecognitionRadar" type="Area2D" parent="."]
+position = Vector2(8, -80)
 collision_layer = 2
 collision_mask = 2
 
@@ -231,6 +232,7 @@ shape = SubResource("CircleShape2D_fbpty")
 debug_color = Color(0.419608, 0.603922, 0, 0.419608)
 
 [node name="RecognitionRadar" type="Area2D" parent="."]
+position = Vector2(8, -80)
 collision_layer = 2
 collision_mask = 2
 monitoring = false
@@ -242,6 +244,7 @@ scale = Vector2(0.75, 1)
 polygon = PackedVector2Array(-1, -1, -401, -98, -401, 56)
 
 [node name="DamageArea" type="Area2D" parent="."]
+position = Vector2(8, -80)
 collision_layer = 2
 collision_mask = 2
 monitoring = false
@@ -252,7 +255,7 @@ shape = SubResource("RectangleShape2D_31uiu")
 debug_color = Color(1, 0.275593, 0.197752, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, 28)
+position = Vector2(0, -52)
 shape = SubResource("RectangleShape2D_0lsnu")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
@@ -273,10 +276,10 @@ libraries = {
 }
 
 [node name="Emotion" type="Label" parent="."]
-offset_left = -6.0
-offset_top = -115.0
-offset_right = 9.0
-offset_bottom = -48.0
+offset_left = 2.0
+offset_top = -195.0
+offset_right = 17.0
+offset_bottom = -128.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.827451, 0.639216, 1)
 theme_override_constants/outline_size = 16

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://xo2oakgbjexk" path="res://textures/player/spritesheet.png" id="3_v1jt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gus1"]
-size = Vector2(41, 116)
+size = Vector2(41, 120)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4q1uy"]
 shader = ExtResource("2_got4k")
@@ -225,7 +225,7 @@ collision_layer = 2
 script = ExtResource("1_6tx37")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 18)
+position = Vector2(-0.5, 20)
 shape = SubResource("RectangleShape2D_7gus1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

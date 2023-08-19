@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=8 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cc0ft21fwyok2" path="res://scenes/templates/base/template.tscn" id="5_sknph"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
 [ext_resource type="Texture2D" uid="uid://p6kj3v7kadoh" path="res://textures/heart/sprite.png" id="9_ntjrk"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nqnya"]
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -30,15 +28,6 @@ position = Vector2(990, 779)
 
 [node name="Robot3" parent="Game/Street" instance=ExtResource("3_rryok")]
 position = Vector2(1924, 699)
-
-[node name="DeadZone" type="Area2D" parent="Game/Street"]
-position = Vector2(-159, 1145)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Street/DeadZone"]
-position = Vector2(916, 82)
-shape = SubResource("WorldBoundaryShape2D_nqnya")
 
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
 position = Vector2(264, 752)
@@ -92,5 +81,4 @@ stretch_mode = 5
 
 [node name="UI" type="Node2D" parent="."]
 
-[connection signal="body_entered" from="Game/Street/DeadZone" to="Game/Street" method="_on_dead_zone_body_entered"]
 [connection signal="changed_hp" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_changed_hp"]
