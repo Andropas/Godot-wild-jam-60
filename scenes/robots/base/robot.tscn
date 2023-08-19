@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cx7i7d4gwys0i"]
+[gd_scene load_steps=26 format=3 uid="uid://cx7i7d4gwys0i"]
 
 [ext_resource type="Script" path="res://scenes/robots/base/robot.gd" id="1_lal1p"]
 [ext_resource type="Texture2D" uid="uid://80p5vdy84gn0" path="res://textures/robot/pritesheet.png" id="2_nbqxs"]
@@ -12,6 +12,27 @@ size = Vector2(83, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lsnu"]
 size = Vector2(48, 104)
+
+[sub_resource type="Shader" id="Shader_4hvap"]
+code = "shader_type canvas_item;
+
+uniform vec4 modulate: source_color; 
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	if (COLOR.a != 0.0) {
+		COLOR.rgb *=  1.0 - modulate.a;
+		COLOR.rgb += modulate.rgb*modulate.a;
+	}
+	
+	
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2bpc"]
+resource_local_to_scene = true
+shader = SubResource("Shader_4hvap")
+shader_parameter/modulate = Color(1, 1, 1, 0)
 
 [sub_resource type="Animation" id="Animation_hje5i"]
 length = 0.001
@@ -217,6 +238,43 @@ states/move/node = SubResource("AnimationNodeAnimation_lebf7")
 states/move/position = Vector2(446.667, 134)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_iosl0"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_eil2x"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_w8geb")]
 
+[sub_resource type="Animation" id="Animation_qcsf5"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/Sprite2D:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hvris"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D/Sprite2D:material:shader_parameter/modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfa48"]
+_data = {
+"RESET": SubResource("Animation_hvris"),
+"hit": SubResource("Animation_qcsf5")
+}
+
 [node name="Robot" type="CharacterBody2D" groups=["robot"]]
 texture_filter = 1
 collision_layer = 2
@@ -259,6 +317,7 @@ position = Vector2(0, -52)
 shape = SubResource("RectangleShape2D_0lsnu")
 
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+material = SubResource("ShaderMaterial_m2bpc")
 position = Vector2(8, -28)
 scale = Vector2(4, 4)
 texture = ExtResource("2_nbqxs")
@@ -299,9 +358,18 @@ active = true
 parameters/conditions/is_idle = false
 parameters/conditions/is_moving = false
 
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EffectAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jfa48")
+}
+
 [connection signal="body_entered" from="DerecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="DerecognitionRadar" to="." method="_on_radar_body_exited"]
 [connection signal="body_entered" from="RecognitionRadar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="RecognitionRadar" to="." method="_on_recognition_body_exited"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
