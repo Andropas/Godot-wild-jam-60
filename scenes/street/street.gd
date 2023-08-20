@@ -2,6 +2,7 @@ extends Node2D
 
 @export var Templates = [preload("res://scenes/templates/base/template.tscn"), preload("res://scenes/templates/1.tscn")]
 @export var Robots = [preload("res://scenes/robots/base/robot.tscn")]
+@export var Bench = preload("res://scenes/bench/bench.tscn")
 
 var templates_passed = 0
 var templates = []
@@ -17,7 +18,7 @@ func _ready():
 
 func _on_template_finished(tmp):
 	if tmp == templates[-2]:
-		create_template(tmp)
+		create_template(len(templates)+1)
 	update_templates(tmp)
 
 func update_templates(tmp):
@@ -44,18 +45,42 @@ func add_robots(tmp, number):
 		tmp.add_child(robot)
 		robot.shape.scale.x = 2*(randi() % 2) - 1
 
+func add_bench(tmp):
+	var bench = Bench.instantiate()
+	var tmp_spawn = tmp.robot_spawn.get_children()
+	var spawn = tmp_spawn[randi()%len(tmp_spawn)].get_child(0)
+	spawn.progress_ratio = 1/6 + randf()/1.5
+	bench.position = spawn.position + spawn.get_parent().position
+	tmp.add_child(bench)
+
 func create_template(num):
-	var tmp = Templates[randi() % len(Templates)].instantiate()
-	if len(templates):
-		tmp.position.x = templates[len(templates)-1].finish_area.global_position.x
+	#ADDING BENCH HERE
+	if num % 4 == 0:
+		var tmp = Templates[randi() % len(Templates)].instantiate()
+		if len(templates):
+			tmp.position.x = templates[len(templates)-1].finish_area.global_position.x
+		else:
+			tmp.position = Vector2()
+		tmp.connect("template_finished", _on_template_finished)
+		call_deferred("add_child", tmp)
+		call_deferred("move_child", tmp, 0)
+		templates.append(tmp)
+		call_deferred("add_bench", tmp)
+		
+		
+	#HERE ADDING ROBOTS
 	else:
-		tmp.position = Vector2()
-	
-	tmp.connect("template_finished", _on_template_finished)
-	call_deferred("add_child", tmp)
-	call_deferred("move_child", tmp, 0)
-	templates.append(tmp)
-	call_deferred("add_robots", tmp, 3)
+		var tmp = Templates[randi() % len(Templates)].instantiate()
+		if len(templates):
+			tmp.position.x = templates[len(templates)-1].finish_area.global_position.x
+		else:
+			tmp.position = Vector2()
+		
+		tmp.connect("template_finished", _on_template_finished)
+		call_deferred("add_child", tmp)
+		call_deferred("move_child", tmp, 0)
+		templates.append(tmp)
+		call_deferred("add_robots", tmp, 3 + int(num/4))
 	
 
 func _on_save_game(bench):
