@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=12 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cc0ft21fwyok2" path="res://scenes/templates/base/template.tscn" id="5_sknph"]
 [ext_resource type="PackedScene" uid="uid://bgb65lg11ovb3" path="res://scenes/newspapers/instructions/how_to_move.tscn" id="6_6m6mp"]
 [ext_resource type="PackedScene" uid="uid://hewutpvm8ayj" path="res://scenes/newspapers/instructions/how_to_jump.tscn" id="8_hoc6t"]
+[ext_resource type="PackedScene" uid="uid://bf0vh7k06vgq8" path="res://scenes/bench/bench.tscn" id="9_ely7f"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
 [ext_resource type="Texture2D" uid="uid://p6kj3v7kadoh" path="res://textures/heart/sprite.png" id="9_ntjrk"]
 
@@ -32,11 +33,14 @@ position = Vector2(1987, 747)
 [node name="News2" parent="Game/Street" instance=ExtResource("6_6m6mp")]
 position = Vector2(264, 832)
 
-[node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
-position = Vector2(264, 752)
-
 [node name="News5" parent="Game/Street" instance=ExtResource("8_hoc6t")]
 position = Vector2(612, 832)
+
+[node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
+position = Vector2(254, 778)
+
+[node name="Bench" parent="Game/Street" instance=ExtResource("9_ely7f")]
+position = Vector2(1051, 869)
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 

@@ -89,8 +89,6 @@ func take_damage(dmg, kickback = -1, stun = 0):
 	hit_points -= dmg
 	if kickback is Vector2:
 		velocity = kickback
-		print(velocity)
-		print(kickback)
 	#effect_anim.play("hit")
 	stun_timer.start(stun)
 	#print(hit_points)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf0vh7k06vgq8"]
+
+[ext_resource type="Script" path="res://scenes/bench/bench.gd" id="1_6tq2s"]
+[ext_resource type="Texture2D" uid="uid://dxrmrf4mic626" path="res://textures/bench/sprite.png" id="1_d3wsc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d31rr"]
+size = Vector2(226, 160)
+
+[node name="Bench" type="Area2D" groups=["interactable"]]
+z_index = -1
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_6tq2s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -79)
+shape = SubResource("RectangleShape2D_d31rr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -160)
+scale = Vector2(4, 4)
+texture = ExtResource("1_d3wsc")

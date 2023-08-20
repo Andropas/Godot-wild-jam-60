@@ -13,12 +13,14 @@ var hit_points = 4
 @onready var effect_anim = $EffectAnimationPlayer
 @onready var anim_tree = $AnimationTree
 @onready var anim_player = $AnimationPlayer
+var is_relaxing = false
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_timer = $JumpTimer
 @onready var camera = $Camera2D
 @onready var punch_area = $PunchArea
 @onready var sprite = $Sprite2D
+@onready var shape = $CollisionShape2D
 
 const CAMERA_SPEED = 130
 
@@ -46,7 +48,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	if not stun_timer.time_left and not punch_timer.time_left:
+	if not stun_timer.time_left and not punch_timer.time_left and not is_relaxing:
 		
 		# Handle Jump.
 		punch_area.get_node("Shape").disabled = true
@@ -72,15 +74,21 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if direction:
 			scale.x = scale.y*direction
+	elif is_relaxing:
+		if Input.get_axis("move_left", "move_right") or Input.is_action_just_pressed("jump"):
+			relax(false)
+		velocity = Vector2()
 		
 	move_and_slide()
 	
-	anim_tree.set("parameters/conditions/is_idle", is_on_floor() and velocity.x == 0)
+	anim_tree.set("parameters/conditions/is_idle", is_on_floor() and velocity.x == 0 and not is_relaxing)
 	anim_tree.set("parameters/conditions/is_moving", is_on_floor() and velocity.x != 0)
 	anim_tree.set("parameters/conditions/in_air", not is_on_floor())
 	anim_tree.set("parameters/in_air/blend_position", velocity.y - 150)
 	anim_tree.set("parameters/conditions/is_hurt", stun_timer.time_left)
 	anim_tree.set("parameters/conditions/is_punch", punch_timer.time_left)
+	anim_tree.set("parameters/conditions/is_relax", is_relaxing)
+	
 
 func call_kill(node, args):
 	node.kill()
@@ -95,11 +103,18 @@ func _on_changed_facing(x_value):
 func die():
 	get_tree().reload_current_scene()
 
+func relax(value):
+	if value:
+		shape.disabled = true
+		hit_points = 4
+		emit_signal("changed_hp", 4)
+	else:
+		shape.disabled = false
+	is_relaxing = value
 
 func _on_punch_area_body_entered(body):
 	if body != self and body.has_method("take_damage"):
 		var kickback = Vector2(scale.y*150, -300)
-		print(kickback)
 		body.take_damage(1, kickback, 0.6)
 
 
