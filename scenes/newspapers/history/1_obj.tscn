@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqssy"]
 size = Vector2(36, 40)
 
-[node name="News" type="Area2D"]
+[node name="News" type="Area2D" groups=["interactable"]]
 texture_filter = 1
 position = Vector2(478, 832)
 collision_layer = 0
@@ -24,5 +24,4 @@ shape = SubResource("RectangleShape2D_bqssy")
 
 [node name="Template" parent="." instance=ExtResource("3_rqr5c")]
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
