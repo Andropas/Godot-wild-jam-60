@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=12 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cc0ft21fwyok2" path="res://scenes/templates/base/template.tscn" id="5_sknph"]
 [ext_resource type="PackedScene" uid="uid://bgb65lg11ovb3" path="res://scenes/newspapers/instructions/how_to_move.tscn" id="6_6m6mp"]
 [ext_resource type="PackedScene" uid="uid://hewutpvm8ayj" path="res://scenes/newspapers/instructions/how_to_jump.tscn" id="8_hoc6t"]
+[ext_resource type="PackedScene" uid="uid://bf0vh7k06vgq8" path="res://scenes/bench/bench.tscn" id="9_ely7f"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
-[ext_resource type="Texture2D" uid="uid://p6kj3v7kadoh" path="res://textures/heart/sprite.png" id="9_ntjrk"]
+[ext_resource type="PackedScene" uid="uid://dnfu502mxot8" path="res://scenes/ui/heart.tscn" id="11_4crbq"]
 
 [node name="Main" type="Node2D"]
 
@@ -19,6 +20,9 @@
 script = ExtResource("1_xfvs2")
 
 [node name="Template" parent="Game/Street" instance=ExtResource("5_sknph")]
+
+[node name="Bench" parent="Game/Street/Template" instance=ExtResource("9_ely7f")]
+position = Vector2(1066, 868)
 
 [node name="News3" parent="Game/Street" instance=ExtResource("3_ta7m6")]
 position = Vector2(905, 836)
@@ -61,31 +65,21 @@ layout_mode = 2
 theme_override_constants/separation = 13
 script = ExtResource("9_fxos5")
 
-[node name="TextureRect" type="TextureRect" parent="Game/GUI/Control/MarginContainer/HeartsBar"]
+[node name="Heart" parent="Game/GUI/Control/MarginContainer/HeartsBar" instance=ExtResource("11_4crbq")]
 layout_mode = 2
-texture = ExtResource("9_ntjrk")
-expand_mode = 2
-stretch_mode = 5
 
-[node name="TextureRect2" type="TextureRect" parent="Game/GUI/Control/MarginContainer/HeartsBar"]
+[node name="Heart2" parent="Game/GUI/Control/MarginContainer/HeartsBar" instance=ExtResource("11_4crbq")]
 layout_mode = 2
-texture = ExtResource("9_ntjrk")
-expand_mode = 2
-stretch_mode = 5
 
-[node name="TextureRect3" type="TextureRect" parent="Game/GUI/Control/MarginContainer/HeartsBar"]
+[node name="Heart3" parent="Game/GUI/Control/MarginContainer/HeartsBar" instance=ExtResource("11_4crbq")]
 layout_mode = 2
-texture = ExtResource("9_ntjrk")
-expand_mode = 2
-stretch_mode = 5
 
-[node name="TextureRect4" type="TextureRect" parent="Game/GUI/Control/MarginContainer/HeartsBar"]
+[node name="Heart4" parent="Game/GUI/Control/MarginContainer/HeartsBar" instance=ExtResource("11_4crbq")]
 layout_mode = 2
-texture = ExtResource("9_ntjrk")
-expand_mode = 2
-stretch_mode = 5
 
 [node name="UI" type="Node2D" parent="."]
 
 [connection signal="child_entered_tree" from="Game/Street" to="Game/Street" method="_on_child_entered_tree"]
+[connection signal="break_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_break_healing"]
 [connection signal="changed_hp" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_changed_hp"]
+[connection signal="start_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_start_healing"]

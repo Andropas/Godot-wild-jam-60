@@ -412,5 +412,6 @@ one_shot = true
 
 [connection signal="changed_facing" from="." to="." method="_on_changed_facing"]
 [connection signal="changed_hp" from="." to="." method="_on_changed_hp"]
+[connection signal="finish_healing" from="." to="." method="_on_finish_healing"]
 [connection signal="body_entered" from="PunchArea" to="." method="_on_punch_area_body_entered"]
 [connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]

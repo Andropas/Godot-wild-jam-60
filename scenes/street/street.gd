@@ -109,3 +109,4 @@ func _on_child_entered_tree(node):
 	if node.has_signal("game_over"):
 		node.connect("game_over", _on_game_over)
 		player = node
+

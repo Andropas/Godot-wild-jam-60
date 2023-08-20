@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -400.0
 
 signal changed_facing(x_value: int)
 
+var max_hit_points = 4
 var hit_points = 4
 @onready var start_position = position
 @onready var stun_timer = $StunTimer
@@ -26,6 +27,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const CAMERA_SPEED = 130
 
 signal new_camera_tween
+signal start_healing(hp)
+signal finish_healing(hp)
+signal break_healing(hp)
 signal changed_hp(hp)
 signal game_over
 signal save_game(bench)
@@ -110,8 +114,8 @@ func die():
 func relax(value):
 	if value:
 		shape.set_deferred("disabled", true)
-		hit_points = 4
-		emit_signal("changed_hp", 4)
+		#emit_signal("start_healing", hit_points)
+		#emit_signal("changed_hp", 4)
 	else:
 		shape.set_deferred("disabled", false)
 	is_relaxing = value
@@ -131,3 +135,10 @@ func _on_changed_hp(hp):
 		sprite.texture = load("res://textures/player/spritesheet_hurt1.png")
 	else:
 		sprite.texture = load("res://textures/player/spritesheet.png")
+	hit_points = hp
+
+
+func _on_finish_healing(hp):
+	if hp <= max_hit_points:
+		emit_signal("changed_hp", hp)
+		print("heal for " + str(hp))
