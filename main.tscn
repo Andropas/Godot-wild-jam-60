@@ -1,92 +1,35 @@
-[gd_scene load_steps=11 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=8 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
-[ext_resource type="PackedScene" uid="uid://4xas3qxikm34" path="res://scenes/house_foreground/house.tscn" id="3_diuo6"]
 [ext_resource type="PackedScene" uid="uid://cx7i7d4gwys0i" path="res://scenes/robots/base/robot.tscn" id="3_rryok"]
 [ext_resource type="PackedScene" uid="uid://cb2uapysovubd" path="res://scenes/newspapers/news.tscn" id="5_8pd3u"]
-[ext_resource type="Texture2D" uid="uid://meo4n8h2x3c1" path="res://textures/house_middleground/0.png" id="5_yh224"]
-[ext_resource type="Texture2D" uid="uid://bkvp2xq5m5vgh" path="res://textures/house_middleground/1.png" id="6_0x3fa"]
-[ext_resource type="Texture2D" uid="uid://cjk4o8qv2tfj6" path="res://textures/house_background/0.png" id="7_x2dht"]
+[ext_resource type="PackedScene" uid="uid://cc0ft21fwyok2" path="res://scenes/templates/base/template.tscn" id="5_sknph"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
 [ext_resource type="Texture2D" uid="uid://p6kj3v7kadoh" path="res://textures/heart/sprite.png" id="9_ntjrk"]
 
 [node name="Main" type="Node2D"]
-texture_filter = 1
 
 [node name="Game" type="Node2D" parent="."]
 
 [node name="Street" type="Node2D" parent="Game"]
 script = ExtResource("1_xfvs2")
 
+[node name="Template" parent="Game/Street" instance=ExtResource("5_sknph")]
+
 [node name="News" parent="Game/Street" instance=ExtResource("5_8pd3u")]
-
-[node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
-position = Vector2(264, 832)
-
-[node name="House" parent="Game/Street" instance=ExtResource("3_diuo6")]
-
-[node name="House2" parent="Game/Street" instance=ExtResource("3_diuo6")]
-position = Vector2(1120, 1100)
-
-[node name="House3" parent="Game/Street" instance=ExtResource("3_diuo6")]
-position = Vector2(1788, 1011)
 
 [node name="Robot" parent="Game/Street" instance=ExtResource("3_rryok")]
 position = Vector2(1487, 686)
 
-[node name="Middleground" type="CanvasLayer" parent="Game/Street"]
-layer = -1
-follow_viewport_enabled = true
-follow_viewport_scale = 0.5
+[node name="Robot2" parent="Game/Street" instance=ExtResource("3_rryok")]
+position = Vector2(990, 779)
 
-[node name="Street" type="Node2D" parent="Game/Street/Middleground"]
-texture_filter = 1
-scale = Vector2(2, 2)
+[node name="Robot3" parent="Game/Street" instance=ExtResource("3_rryok")]
+position = Vector2(1924, 699)
 
-[node name="House" type="Sprite2D" parent="Game/Street/Middleground/Street"]
-position = Vector2(528, 542)
-scale = Vector2(4, 4)
-texture = ExtResource("5_yh224")
-
-[node name="House2" type="Sprite2D" parent="Game/Street/Middleground/Street"]
-position = Vector2(1075, 765)
-scale = Vector2(4, 4)
-texture = ExtResource("6_0x3fa")
-
-[node name="House3" type="Sprite2D" parent="Game/Street/Middleground/Street"]
-position = Vector2(1503, 519)
-scale = Vector2(4, 4)
-texture = ExtResource("6_0x3fa")
-
-[node name="House4" type="Sprite2D" parent="Game/Street/Middleground/Street"]
-position = Vector2(-7, 765)
-scale = Vector2(4, 4)
-texture = ExtResource("5_yh224")
-
-[node name="Background" type="CanvasLayer" parent="Game/Street"]
-layer = -2
-follow_viewport_enabled = true
-follow_viewport_scale = 0.25
-
-[node name="Street" type="Node2D" parent="Game/Street/Background"]
-texture_filter = 1
-scale = Vector2(4, 4)
-
-[node name="House" type="Sprite2D" parent="Game/Street/Background/Street"]
-position = Vector2(878, 643)
-scale = Vector2(4, 4)
-texture = ExtResource("7_x2dht")
-
-[node name="House2" type="Sprite2D" parent="Game/Street/Background/Street"]
-position = Vector2(1338, 643)
-scale = Vector2(4, 4)
-texture = ExtResource("7_x2dht")
-
-[node name="House3" type="Sprite2D" parent="Game/Street/Background/Street"]
-position = Vector2(-50, 643)
-scale = Vector2(4, 4)
-texture = ExtResource("7_x2dht")
+[node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
+position = Vector2(264, 752)
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 
