@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=13 format=3 uid="uid://bex5t1h6uw3ih"]
 
+[ext_resource type="Script" path="res://scenes/street/game.gd" id="1_8ghxh"]
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
 [ext_resource type="PackedScene" uid="uid://64afktx3gtmc" path="res://scenes/newspapers/instructions/how_to_fight.tscn" id="5_8auyv"]
@@ -8,12 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://hewutpvm8ayj" path="res://scenes/newspapers/instructions/how_to_jump.tscn" id="8_hoc6t"]
 [ext_resource type="PackedScene" uid="uid://bf0vh7k06vgq8" path="res://scenes/bench/bench.tscn" id="9_ely7f"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
+[ext_resource type="AudioStream" uid="uid://cmkyiw18b6x5i" path="res://In-Game_Music.1.wav" id="9_vp0fs"]
 [ext_resource type="PackedScene" uid="uid://dnfu502mxot8" path="res://scenes/ui/heart.tscn" id="11_4crbq"]
 [ext_resource type="PackedScene" uid="uid://db0xo6v4hphf5" path="res://scenes/intro/intro.tscn" id="12_2np85"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Game" type="Node2D" parent="."]
+script = ExtResource("1_8ghxh")
 
 [node name="Street" type="Node2D" parent="Game"]
 script = ExtResource("1_xfvs2")
@@ -34,6 +37,10 @@ position = Vector2(612, 832)
 
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
 position = Vector2(254, 778)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Game/Street"]
+stream = ExtResource("9_vp0fs")
+autoplay = true
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 
@@ -78,3 +85,5 @@ layout_mode = 2
 [connection signal="break_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_break_healing"]
 [connection signal="changed_hp" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_changed_hp"]
 [connection signal="start_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_start_healing"]
+[connection signal="finished" from="Game/Street/AudioStreamPlayer2D" to="Game" method="_on_audio_stream_player_2d_finished"]
+[connection signal="tree_exited" from="Intro" to="Game" method="_on_intro_tree_exited"]
