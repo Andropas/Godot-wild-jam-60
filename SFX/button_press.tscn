@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b48hvjppu4s8j"]
+
+[ext_resource type="AudioStream" uid="uid://cnts47rcjc3jf" path="res://SFX/Col Legno Celli sound altered.wav" id="1_rn4vd"]
+
+[node name="ButtonPress" type="AudioStreamPlayer2D"]
+position = Vector2(577, 295)
+scale = Vector2(7, 7)
+stream = ExtResource("1_rn4vd")
