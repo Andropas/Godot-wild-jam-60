@@ -1,6 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgqutyctidilx"]
+[gd_scene load_steps=6 format=3 uid="uid://bgqutyctidilx"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_j26nu"]
+[ext_resource type="Texture2D" uid="uid://tnn13kidiu0l" path="res://textures/menu/Steel Paradise.1 Sprite Sheet.png" id="2_y7jes"]
+
+[sub_resource type="Animation" id="Animation_ivgkh"]
+resource_name = "menu"
+length = 1.05
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SteelParadise:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_stspj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SteelParadise:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cx7vi"]
+_data = {
+"RESET": SubResource("Animation_stspj"),
+"menu": SubResource("Animation_ivgkh")
+}
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -12,21 +52,43 @@ grow_vertical = 2
 script = ExtResource("1_j26nu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = 96.0
+offset_right = 105.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
 text = "Start"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Start")
 text = "Quit
 "
+
+[node name="SteelParadise" type="Sprite2D" parent="."]
+position = Vector2(577, 295)
+scale = Vector2(7, 7)
+texture = ExtResource("2_y7jes")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cx7vi")
+}
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
