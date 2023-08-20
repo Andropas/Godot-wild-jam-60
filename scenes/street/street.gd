@@ -36,7 +36,7 @@ func add_robots(tmp, number):
 	while robots:
 		var tmp_spawn = tmp.robot_spawn.get_children()
 		var spawn = tmp_spawn[randi()%len(tmp_spawn)].get_child(0)
-		spawn.progress_ratio = randf()
+		spawn.progress_ratio = 1/5 + randf()/1.6
 		
 		
 		var robot = robots[0]
@@ -86,15 +86,17 @@ func create_template(num):
 func _on_save_game(bench):
 	last_bench = bench
 	get_tree().call_group("persist", "save")
+	
 
 func load_save():
 	if last_bench:
 		update_templates(templates.find(last_bench.get_parent()))
 		player.position = last_bench.global_position
 		player.relax(true)
+		player.emit_signal("changed_hp", player.saved_hp)
 	else:
 		player.position = player.start_position
-		player.hit_points = 4
+		player.emit_signal("changed_hp", player.saved_hp)
 	get_tree().call_group("persist", "_on_play_again")
 	
 
@@ -105,7 +107,6 @@ func _on_game_over():
 func _on_child_entered_tree(node):
 	if node.has_signal("save_game"):
 		node.connect("save_game", _on_save_game)
-		print("we have this")
 	if node.has_signal("game_over"):
 		node.connect("game_over", _on_game_over)
 		player = node

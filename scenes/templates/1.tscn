@@ -18,7 +18,7 @@ b = Vector2(1572, -228)
 
 [sub_resource type="Curve2D" id="Curve2D_u5whe"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 103, 859, 0, 0, 0, 0, 681, 861)
+"points": PackedVector2Array(0, 0, 0, 0, 103, 861, 0, 0, 0, 0, 682, 861)
 }
 point_count = 2
 
@@ -130,24 +130,21 @@ position = Vector2(-52, -80)
 curve = SubResource("Curve2D_u5whe")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="RobotSpawn/Path2D"]
-position = Vector2(103, 859)
-rotation = 0.00346019
+position = Vector2(103, 861)
 
 [node name="Path2D2" type="Path2D" parent="RobotSpawn"]
 position = Vector2(726, 9)
 curve = SubResource("Curve2D_u5whe")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="RobotSpawn/Path2D2"]
-position = Vector2(103, 859)
-rotation = 0.00346019
+position = Vector2(103, 861)
 
 [node name="Path2D3" type="Path2D" parent="RobotSpawn"]
 position = Vector2(1394, -81)
 curve = SubResource("Curve2D_u5whe")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="RobotSpawn/Path2D3"]
-position = Vector2(103, 859)
-rotation = 0.00346019
+position = Vector2(103, 861)
 
 [connection signal="body_entered" from="FinishArea" to="." method="_on_finish_area_body_entered" flags=18]
 [connection signal="body_entered" from="DeadArea" to="." method="_on_dead_area_body_entered" flags=18]

@@ -8,6 +8,7 @@ signal changed_facing(x_value: int)
 
 var max_hit_points = 4
 var hit_points = 4
+var saved_hp = 4
 @onready var start_position = position
 @onready var stun_timer = $StunTimer
 @onready var safe_timer = $SafeTimer
@@ -142,3 +143,4 @@ func _on_finish_healing(hp):
 	if hp <= max_hit_points:
 		emit_signal("changed_hp", hp)
 		print("heal for " + str(hp))
+		saved_hp = hp

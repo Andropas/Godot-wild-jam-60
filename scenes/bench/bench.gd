@@ -13,6 +13,7 @@ func _process(delta):
 				obj.relax(true)
 				obj.emit_signal("save_game", self)
 				particles.emitting = true
+				sitter.saved_hp = sitter.hit_points
 	if sitter:
 		if not sitter.is_relaxing:
 			if regen_timer.time_left:
@@ -31,3 +32,4 @@ func _process(delta):
 
 func _on_regen_timer_timeout():
 	sitter.emit_signal("finish_healing", sitter.hit_points+1)
+	#sitter.saved_hp = sitter.hit_points
