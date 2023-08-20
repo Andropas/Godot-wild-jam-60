@@ -40,7 +40,6 @@ position = Vector2(254, 778)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Game/Street"]
 stream = ExtResource("9_vp0fs")
-autoplay = true
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 

@@ -15,6 +15,7 @@ func _process(delta):
 
 func _on_intro_tree_exited():
 	street.set_process(true)
+	audio.play()
 
 
 func _on_audio_stream_player_2d_finished():
