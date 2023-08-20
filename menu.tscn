@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1uxxhrcw37ea"]
+[gd_scene load_steps=7 format=3 uid="uid://cxvb3ku8ych17"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_j26nu"]
 [ext_resource type="Texture2D" uid="uid://tnn13kidiu0l" path="res://textures/menu/Steel Paradise.1 Sprite Sheet.png" id="2_y7jes"]

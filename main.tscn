@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=11 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
-[ext_resource type="PackedScene" uid="uid://cx7i7d4gwys0i" path="res://scenes/robots/base/robot.tscn" id="3_rryok"]
-[ext_resource type="PackedScene" uid="uid://cb2uapysovubd" path="res://scenes/newspapers/news.tscn" id="5_8pd3u"]
+[ext_resource type="PackedScene" uid="uid://c5v8d3motugo6" path="res://scenes/newspapers/history/0_obj.tscn" id="3_67g01"]
+[ext_resource type="PackedScene" uid="uid://dplinbrdebd0q" path="res://scenes/newspapers/history/1_obj.tscn" id="3_ta7m6"]
+[ext_resource type="PackedScene" uid="uid://64afktx3gtmc" path="res://scenes/newspapers/instructions/how_to_fight.tscn" id="5_8auyv"]
 [ext_resource type="PackedScene" uid="uid://cc0ft21fwyok2" path="res://scenes/templates/base/template.tscn" id="5_sknph"]
+[ext_resource type="PackedScene" uid="uid://bgb65lg11ovb3" path="res://scenes/newspapers/instructions/how_to_move.tscn" id="6_6m6mp"]
+[ext_resource type="PackedScene" uid="uid://hewutpvm8ayj" path="res://scenes/newspapers/instructions/how_to_jump.tscn" id="8_hoc6t"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
 [ext_resource type="Texture2D" uid="uid://p6kj3v7kadoh" path="res://textures/heart/sprite.png" id="9_ntjrk"]
 
@@ -17,19 +20,23 @@ script = ExtResource("1_xfvs2")
 
 [node name="Template" parent="Game/Street" instance=ExtResource("5_sknph")]
 
-[node name="News" parent="Game/Street" instance=ExtResource("5_8pd3u")]
+[node name="News3" parent="Game/Street" instance=ExtResource("3_ta7m6")]
+position = Vector2(905, 836)
 
-[node name="Robot" parent="Game/Street" instance=ExtResource("3_rryok")]
-position = Vector2(1487, 686)
+[node name="News" parent="Game/Street" instance=ExtResource("3_67g01")]
+position = Vector2(392, 832)
 
-[node name="Robot2" parent="Game/Street" instance=ExtResource("3_rryok")]
-position = Vector2(990, 779)
+[node name="News4" parent="Game/Street" instance=ExtResource("5_8auyv")]
+position = Vector2(1987, 747)
 
-[node name="Robot3" parent="Game/Street" instance=ExtResource("3_rryok")]
-position = Vector2(1924, 699)
+[node name="News2" parent="Game/Street" instance=ExtResource("6_6m6mp")]
+position = Vector2(264, 832)
 
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
 position = Vector2(264, 752)
+
+[node name="News5" parent="Game/Street" instance=ExtResource("8_hoc6t")]
+position = Vector2(612, 832)
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 

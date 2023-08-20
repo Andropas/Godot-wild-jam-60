@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cysqtfgipiv3w"]
+
+[ext_resource type="Texture2D" uid="uid://0klwebjl287s" path="res://textures/newspaper/history/1.png" id="2_ddklg"]
+[ext_resource type="PackedScene" uid="uid://c2xnugjog0thv" path="res://scenes/newspapers/newspaper_template.tscn" id="3_5xekv"]
+
+[node name="Template" instance=ExtResource("3_5xekv")]
+
+[node name="TextureRect" parent="Newspaper/VBoxContainer/MarginContainer2/HBoxContainer" index="0"]
+texture = ExtResource("2_ddklg")
+
+[node name="Label" parent="Newspaper/VBoxContainer/MarginContainer2/HBoxContainer" index="1"]
+text = "Robots went crazy!!! Stay home, keep calm"

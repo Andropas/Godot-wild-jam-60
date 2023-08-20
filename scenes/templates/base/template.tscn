@@ -75,9 +75,9 @@ follow_viewport_scale = 0.05
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
 modulate = Color(0.584314, 0.607843, 1, 1)
 offset_left = -60280.0
-offset_top = 1140.0
+offset_top = -1900.0
 offset_right = -57949.0
-offset_bottom = 1274.0
+offset_bottom = -1766.0
 scale = Vector2(80, 80)
 texture = ExtResource("3_fpsju")
 expand_mode = 1

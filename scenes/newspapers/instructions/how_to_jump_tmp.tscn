@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc28d8s3rrqow"]
+
+[ext_resource type="PackedScene" uid="uid://c2xnugjog0thv" path="res://scenes/newspapers/newspaper_template.tscn" id="1_e50em"]
+[ext_resource type="Texture2D" uid="uid://86x0kmnhgs1d" path="res://textures/newspaper/instructions/how_to_jump.png" id="2_t585l"]
+
+[node name="Template" instance=ExtResource("1_e50em")]
+
+[node name="TextureRect" parent="Newspaper/VBoxContainer/MarginContainer2/HBoxContainer" index="0"]
+texture = ExtResource("2_t585l")
+
+[node name="Label" parent="Newspaper/VBoxContainer/MarginContainer2/HBoxContainer" index="1"]
+text = "Use space to jump"

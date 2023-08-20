@@ -17,6 +17,8 @@ var hit_points = 4
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var jump_timer = $JumpTimer
 @onready var camera = $Camera2D
+@onready var punch_area = $PunchArea
+@onready var sprite = $Sprite2D
 
 const CAMERA_SPEED = 130
 
@@ -32,7 +34,7 @@ func take_damage(dmg, kickback = -1, stun = 0):
 		effect_anim.play("hit")
 		safe_timer.start(1.5)
 		punch_timer.stop()
-		$PunchArea/CollisionShape2D.set_deferred("disabled", true)
+		punch_area.get_node("Shape").set_deferred("disabled", true)
 		emit_signal("changed_hp", hit_points)
 		#print(hit_points)
 		if hit_points <= 0:
@@ -47,7 +49,7 @@ func _physics_process(delta):
 	if not stun_timer.time_left and not punch_timer.time_left:
 		
 		# Handle Jump.
-		
+		punch_area.get_node("Shape").disabled = true
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			jump_timer.start()
 		if Input.is_action_just_released("jump"):
@@ -102,4 +104,11 @@ func _on_punch_area_body_entered(body):
 
 
 func _on_punch_timer_timeout():
-	$PunchArea/CollisionShape2D.disabled = true
+	punch_area.get_node("Shape").disabled = true
+
+
+func _on_changed_hp(hp):
+	if hp <= 2:
+		sprite.texture = load("res://textures/player/spritesheet_hurt1.png")
+	else:
+		sprite.texture = load("res://textures/player/spritesheet.png")

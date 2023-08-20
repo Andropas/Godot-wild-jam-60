@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/newspapers/news.gd" id="1_lc4q5"]
 [ext_resource type="Texture2D" uid="uid://bq1vppcwrr14r" path="res://textures/newspaper/sprite.png" id="1_ud8jb"]
-[ext_resource type="PackedScene" uid="uid://c2xnugjog0thv" path="res://scenes/newspapers/newspaper_template.tscn" id="3_86tc2"]
+[ext_resource type="PackedScene" uid="uid://chud8gbxnr0i3" path="res://scenes/newspapers/instructions/how_to_move_tmp.tscn" id="3_bw4ve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqssy"]
 size = Vector2(36, 40)
@@ -22,7 +22,7 @@ texture = ExtResource("1_ud8jb")
 position = Vector2(-2, 12)
 shape = SubResource("RectangleShape2D_bqssy")
 
-[node name="Template" parent="." instance=ExtResource("3_86tc2")]
+[node name="Template" parent="." instance=ExtResource("3_bw4ve")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var Templates = [preload("res://scenes/templates/base/template.tscn")]
+@export var Templates = [preload("res://scenes/templates/base/template.tscn"), preload("res://scenes/templates/1.tscn")]
 @export var Robots = [preload("res://scenes/robots/base/robot.tscn")]
 
 var templates_passed = 0

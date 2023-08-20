@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://chud8gbxnr0i3"]
+
+[ext_resource type="PackedScene" uid="uid://c2xnugjog0thv" path="res://scenes/newspapers/newspaper_template.tscn" id="1_5pay1"]
+[ext_resource type="Texture2D" uid="uid://b3ef2os8nise2" path="res://textures/newspaper/instructions/how_to_move.png" id="2_1gvpt"]
+
+[node name="Template" instance=ExtResource("1_5pay1")]
+
+[node name="TextureRect" parent="Newspaper/VBoxContainer/MarginContainer2/HBoxContainer" index="0"]
+texture = ExtResource("2_1gvpt")
+
+[node name="Label" parent="Newspaper/VBoxContainer/MarginContainer2/HBoxContainer" index="1"]
+text = "Use \"A\", \"D\" or arrow keys to move"

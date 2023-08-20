@@ -49,7 +49,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PunchArea/CollisionShape2D:disabled")
+tracks/1/path = NodePath("PunchArea/Shape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -157,7 +157,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PunchArea/CollisionShape2D:disabled")
+tracks/1/path = NodePath("PunchArea/Shape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -348,7 +348,7 @@ parameters/in_air/blend_position = -0.143498
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchArea"]
+[node name="Shape" type="CollisionShape2D" parent="PunchArea"]
 position = Vector2(59.5, 11)
 shape = SubResource("RectangleShape2D_n6sxl")
 disabled = true
@@ -358,5 +358,6 @@ wait_time = 0.6
 one_shot = true
 
 [connection signal="changed_facing" from="." to="." method="_on_changed_facing"]
+[connection signal="changed_hp" from="." to="." method="_on_changed_hp"]
 [connection signal="body_entered" from="PunchArea" to="." method="_on_punch_area_body_entered"]
 [connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]

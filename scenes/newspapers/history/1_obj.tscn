@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dplinbrdebd0q"]
+
+[ext_resource type="Script" path="res://scenes/newspapers/news.gd" id="1_rpxex"]
+[ext_resource type="Texture2D" uid="uid://bq1vppcwrr14r" path="res://textures/newspaper/sprite.png" id="2_u4mpl"]
+[ext_resource type="PackedScene" uid="uid://cysqtfgipiv3w" path="res://scenes/newspapers/history/1.tscn" id="3_rqr5c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqssy"]
+size = Vector2(36, 40)
+
+[node name="News" type="Area2D"]
+texture_filter = 1
+position = Vector2(478, 832)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rpxex")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_u4mpl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 12)
+shape = SubResource("RectangleShape2D_bqssy")
+
+[node name="Template" parent="." instance=ExtResource("3_rqr5c")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
