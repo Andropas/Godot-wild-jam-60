@@ -82,13 +82,15 @@ func _on_damage_area_body_entered(body):
 	for g in target_groups:
 		if body.is_in_group(g):
 			if body.has_method("take_damage"):
-				body.take_damage(1, Vector2(direction*300, -300), 0.5)
+				body.take_damage(1, Vector2(direction*150, -300), 0.5)
 			break
 
 func take_damage(dmg, kickback = -1, stun = 0):
 	hit_points -= dmg
 	if kickback is Vector2:
 		velocity = kickback
+		print(velocity)
+		print(kickback)
 	#effect_anim.play("hit")
 	stun_timer.start(stun)
 	#print(hit_points)

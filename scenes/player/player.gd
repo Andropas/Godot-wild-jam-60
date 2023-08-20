@@ -96,4 +96,10 @@ func die():
 
 func _on_punch_area_body_entered(body):
 	if body != self and body.has_method("take_damage"):
-		body.take_damage(1, Vector2(scale.x*300, -300), 0.6)
+		var kickback = Vector2(scale.y*150, -300)
+		print(kickback)
+		body.take_damage(1, kickback, 0.6)
+
+
+func _on_punch_timer_timeout():
+	$PunchArea/CollisionShape2D.disabled = true

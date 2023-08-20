@@ -41,6 +41,7 @@ func add_robots(tmp, number):
 		robot.position = spawn.position + spawn.get_parent().position
 		robots.erase(robot)
 		tmp.add_child(robot)
+		robot.shape.scale.x = 2*(randi() % 2) - 1
 
 func create_template():
 	var tmp = Templates[randi() % len(Templates)].instantiate()
