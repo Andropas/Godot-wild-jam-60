@@ -1,5 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwvq88ypnytis"]
+[gd_scene load_steps=3 format=3 uid="uid://bwvq88ypnytis"]
 
 [ext_resource type="PackedScene" uid="uid://bojj5ifm0rdlj" path="res://scenes/intro/16_26/1.tscn" id="1_qxevg"]
+[ext_resource type="Texture2D" uid="uid://cwt7tnfmvedqs" path="res://scenes/intro/0_16/0.png" id="2_meyry"]
 
 [node name="Template" instance=ExtResource("1_qxevg")]
+
+[node name="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer" index="0"]
+texture = ExtResource("2_meyry")
+
+[node name="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer" index="1"]
+text = "City is in ruins. People demand the "
+
+[node name="Label" parent="VBoxContainer/MarginContainer3" index="0"]
+text = "inventor's head"

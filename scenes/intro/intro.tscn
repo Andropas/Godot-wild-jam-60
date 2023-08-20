@@ -21,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.8, 4.5, 10.9, 13, 15, 15.8, 23.3, 25, 26),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 1), Color(1, 1, 1, 0.266667)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 0.266667), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -54,10 +54,10 @@ tracks/3/path = NodePath("Template3:position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(15.3, 16.6, 18.4, 19.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(15.3, 17, 18.3, 19.4, 20.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1074, 28), Vector2(-60, 68), Vector2(298, 78), Vector2(1118, 44)]
+"values": [Vector2(1074, 28), Vector2(180, 81), Vector2(171, 83), Vector2(-60, 68), Vector2(1118, 44)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -102,10 +102,10 @@ tracks/7/path = NodePath("Template5:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(29.4),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(25.3, 27, 29.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(72, -575)]
+"values": [Vector2(162, 76), Vector2(162, 76), Vector2(72, -575)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -375,3 +375,4 @@ color = Color(0.0509804, 0.0470588, 0.0862745, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_m2ndb")
+stream_paused = true

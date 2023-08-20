@@ -4,3 +4,9 @@
 
 [node name="Template" instance=ExtResource("1_lx0lt")]
 scale = Vector2(4, 4)
+
+[node name="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer" index="1"]
+text = "Statue in honor of Rotwang was "
+
+[node name="Label" parent="VBoxContainer/MarginContainer3" index="0"]
+text = "erected in the town's square"
