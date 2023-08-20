@@ -1,7 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgqutyctidilx"]
+[gd_scene load_steps=7 format=3 uid="uid://1uxxhrcw37ea"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_j26nu"]
 [ext_resource type="Texture2D" uid="uid://tnn13kidiu0l" path="res://textures/menu/Steel Paradise.1 Sprite Sheet.png" id="2_y7jes"]
+[ext_resource type="PackedScene" uid="uid://b48hvjppu4s8j" path="res://SFX/button_press.tscn" id="3_8igdp"]
+
+[sub_resource type="Animation" id="Animation_stspj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SteelParadise:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_ivgkh"]
 resource_name = "menu"
@@ -19,21 +35,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
-}
-
-[sub_resource type="Animation" id="Animation_stspj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SteelParadise:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cx7vi"]
@@ -89,6 +90,8 @@ hframes = 7
 libraries = {
 "": SubResource("AnimationLibrary_cx7vi")
 }
+
+[node name="ButtonPress" parent="." instance=ExtResource("3_8igdp")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
