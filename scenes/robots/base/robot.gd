@@ -8,14 +8,18 @@ var direction = 0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var hit_points = 3
 var target_groups = ["player"]
+var alive = true
 var target
 @onready var target_pos = global_position
+@onready var save_position = global_position
+@onready var save_hp = 3
 
 @onready var pause_timer = $PauseTimer
 @onready var stun_timer = $StunTimer
 @onready var derecognition = $DerecognitionRadar
 @onready var recognition = $RecognitionRadar
 @onready var damage_area = $DamageArea
+@onready var damage_shape = $DamageArea/CollisionShape2D
 @onready var shape = $CollisionShape2D
 
 @onready var emotion_anim = $EmotionAnim
@@ -35,7 +39,7 @@ func _physics_process(delta):
 					direction = sign(target_pos.x - global_position.x)
 			elif target:
 				#recognition.monitoring = false
-				damage_area.monitoring = false
+				damage_shape.set_deferred("disabled", true)
 				pause_timer.start()
 				
 		elif is_on_floor():
@@ -74,16 +78,17 @@ func update_target():
 		target_pos = target.position + Vector2(sign(target.position.x - global_position.x), 0)*120
 
 func _on_pause_timer_timeout():
-	damage_area.monitoring = true
+	damage_shape.set_deferred("disabled", false)
 	update_target()
 
 
 func _on_damage_area_body_entered(body):
-	for g in target_groups:
-		if body.is_in_group(g):
-			if body.has_method("take_damage"):
-				body.take_damage(1, Vector2(direction*150, -300), 0.5)
-			break
+	if alive:
+		for g in target_groups:
+			if body.is_in_group(g):
+				if body.has_method("take_damage"):
+					body.take_damage(1, Vector2(direction*150, -300), 0.5)
+				break
 
 func take_damage(dmg, kickback = -1, stun = 0):
 	hit_points -= dmg
@@ -98,8 +103,25 @@ func take_damage(dmg, kickback = -1, stun = 0):
 	
 	
 func die():
-	queue_free()
+	hide()
+	alive = false
+	damage_shape.set_deferred("disabled", true)
 
+func save():
+	save_position = global_position
+	save_hp = hit_points
+
+func _on_play_again():
+	show()
+	
+	damage_shape.set_deferred("disabled", false)
+	global_position = save_position
+	hit_points = save_hp
+	if save_hp > 0:
+		alive = true
+	else:
+		queue_free()
+	target_pos = global_position
 
 func _on_stun_timer_timeout():
 	pause_timer.start()

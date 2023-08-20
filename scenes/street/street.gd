@@ -5,6 +5,8 @@ extends Node2D
 
 var templates_passed = 0
 var templates = []
+var last_bench
+var player
 
 func _ready():
 	randomize()
@@ -12,13 +14,14 @@ func _ready():
 	for t in templates:
 		t.connect("template_finished", _on_template_finished)
 	create_template(1)
-	
 
 func _on_template_finished(tmp):
 	if tmp == templates[-2]:
 		create_template(tmp)
+	update_templates(tmp)
+
+func update_templates(tmp):
 	var index = templates.find(tmp)
-	
 	for i in range(len(templates)):
 		if i < index - 1:
 			templates[i].set_process(false)
@@ -54,4 +57,30 @@ func create_template(num):
 	templates.append(tmp)
 	call_deferred("add_robots", tmp, 3)
 	
+
+func _on_save_game(bench):
+	last_bench = bench
+	get_tree().call_group("persist", "save")
+
+func load_save():
+	if last_bench:
+		update_templates(templates.find(last_bench.get_parent()))
+		player.position = last_bench.global_position
+		player.relax(true)
+	else:
+		player.position = player.start_position
+		player.hit_points = 4
+	get_tree().call_group("persist", "_on_play_again")
 	
+
+func _on_game_over():
+	load_save()
+
+
+func _on_child_entered_tree(node):
+	if node.has_signal("save_game"):
+		node.connect("save_game", _on_save_game)
+		print("we have this")
+	if node.has_signal("game_over"):
+		node.connect("game_over", _on_game_over)
+		player = node

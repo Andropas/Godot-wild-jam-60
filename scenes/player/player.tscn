@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://cnsb34rjr1g3t"]
+[gd_scene load_steps=50 format=3 uid="uid://cnsb34rjr1g3t"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6tx37"]
 [ext_resource type="Shader" path="res://scenes/player/player.gdshader" id="2_got4k"]
@@ -313,6 +313,10 @@ advance_condition = &"is_relax"
 advance_mode = 2
 advance_condition = &"is_idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_88l45"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pja05"]
 states/hurt/node = SubResource("AnimationNodeAnimation_p2qha")
 states/hurt/position = Vector2(622.667, 50)
@@ -326,7 +330,7 @@ states/punch/node = SubResource("AnimationNodeAnimation_c0vgh")
 states/punch/position = Vector2(960, 219.333)
 states/relax/node = SubResource("AnimationNodeAnimation_aey7k")
 states/relax/position = Vector2(801.333, -66)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_bxb5l"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_rwost"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_pa8j4"), "move", "in_air", SubResource("AnimationNodeStateMachineTransition_heb04"), "idle", "in_air", SubResource("AnimationNodeStateMachineTransition_vpoi2"), "in_air", "move", SubResource("AnimationNodeStateMachineTransition_lrwv5"), "in_air", "idle", SubResource("AnimationNodeStateMachineTransition_f8s4s"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_7uwxy"), "in_air", "hurt", SubResource("AnimationNodeStateMachineTransition_epcbr"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_n61kv"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_rhk8l"), "punch", "idle", SubResource("AnimationNodeStateMachineTransition_kcftj"), "punch", "hurt", SubResource("AnimationNodeStateMachineTransition_gc3sq"), "idle", "punch", SubResource("AnimationNodeStateMachineTransition_86ag5"), "move", "punch", SubResource("AnimationNodeStateMachineTransition_iic44"), "move", "relax", SubResource("AnimationNodeStateMachineTransition_cxx3p"), "hurt", "relax", SubResource("AnimationNodeStateMachineTransition_sd236"), "idle", "relax", SubResource("AnimationNodeStateMachineTransition_n283n"), "in_air", "relax", SubResource("AnimationNodeStateMachineTransition_72nnt"), "punch", "relax", SubResource("AnimationNodeStateMachineTransition_4n22j"), "relax", "idle", SubResource("AnimationNodeStateMachineTransition_s1j0x")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_bxb5l"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_rwost"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_pa8j4"), "move", "in_air", SubResource("AnimationNodeStateMachineTransition_heb04"), "idle", "in_air", SubResource("AnimationNodeStateMachineTransition_vpoi2"), "in_air", "move", SubResource("AnimationNodeStateMachineTransition_lrwv5"), "in_air", "idle", SubResource("AnimationNodeStateMachineTransition_f8s4s"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_7uwxy"), "in_air", "hurt", SubResource("AnimationNodeStateMachineTransition_epcbr"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_n61kv"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_rhk8l"), "punch", "idle", SubResource("AnimationNodeStateMachineTransition_kcftj"), "punch", "hurt", SubResource("AnimationNodeStateMachineTransition_gc3sq"), "idle", "punch", SubResource("AnimationNodeStateMachineTransition_86ag5"), "move", "punch", SubResource("AnimationNodeStateMachineTransition_iic44"), "move", "relax", SubResource("AnimationNodeStateMachineTransition_cxx3p"), "hurt", "relax", SubResource("AnimationNodeStateMachineTransition_sd236"), "idle", "relax", SubResource("AnimationNodeStateMachineTransition_n283n"), "in_air", "relax", SubResource("AnimationNodeStateMachineTransition_72nnt"), "punch", "relax", SubResource("AnimationNodeStateMachineTransition_4n22j"), "relax", "idle", SubResource("AnimationNodeStateMachineTransition_s1j0x"), "relax", "move", SubResource("AnimationNodeStateMachineTransition_88l45")]
 graph_offset = Vector2(0, -148.517)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n6sxl"]

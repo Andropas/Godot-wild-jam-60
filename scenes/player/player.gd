@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -400.0
 signal changed_facing(x_value: int)
 
 var hit_points = 4
+@onready var start_position = position
 @onready var stun_timer = $StunTimer
 @onready var safe_timer = $SafeTimer
 @onready var punch_timer = $PunchTimer
@@ -26,6 +27,8 @@ const CAMERA_SPEED = 130
 
 signal new_camera_tween
 signal changed_hp(hp)
+signal game_over
+signal save_game(bench)
 
 func take_damage(dmg, kickback = -1, stun = 0):
 	if not safe_timer.time_left:
@@ -101,15 +104,16 @@ func _on_changed_facing(x_value):
 	connect("new_camera_tween", camera_tween.kill)
 
 func die():
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
+	emit_signal("game_over")
 
 func relax(value):
 	if value:
-		shape.disabled = true
+		shape.set_deferred("disabled", true)
 		hit_points = 4
 		emit_signal("changed_hp", 4)
 	else:
-		shape.disabled = false
+		shape.set_deferred("disabled", false)
 	is_relaxing = value
 
 func _on_punch_area_body_entered(body):

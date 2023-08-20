@@ -21,6 +21,9 @@ script = ExtResource("1_xfvs2")
 
 [node name="Template" parent="Game/Street" instance=ExtResource("5_sknph")]
 
+[node name="Bench" parent="Game/Street/Template" instance=ExtResource("9_ely7f")]
+position = Vector2(1051, 869)
+
 [node name="News3" parent="Game/Street" instance=ExtResource("3_ta7m6")]
 position = Vector2(905, 836)
 
@@ -38,9 +41,6 @@ position = Vector2(612, 832)
 
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
 position = Vector2(254, 778)
-
-[node name="Bench" parent="Game/Street" instance=ExtResource("9_ely7f")]
-position = Vector2(1051, 869)
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 
@@ -91,4 +91,5 @@ stretch_mode = 5
 
 [node name="UI" type="Node2D" parent="."]
 
+[connection signal="child_entered_tree" from="Game/Street" to="Game/Street" method="_on_child_entered_tree"]
 [connection signal="changed_hp" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_changed_hp"]

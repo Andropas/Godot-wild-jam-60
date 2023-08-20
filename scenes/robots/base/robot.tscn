@@ -275,7 +275,7 @@ _data = {
 "hit": SubResource("Animation_qcsf5")
 }
 
-[node name="Robot" type="CharacterBody2D" groups=["robot"]]
+[node name="Robot" type="CharacterBody2D" groups=["persist", "robot"]]
 collision_layer = 2
 script = ExtResource("1_lal1p")
 
@@ -304,7 +304,6 @@ polygon = PackedVector2Array(-1, -1, -401, -98, -401, 56)
 position = Vector2(8, -80)
 collision_layer = 2
 collision_mask = 2
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(-11.5, 31.5)
