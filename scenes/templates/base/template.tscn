@@ -140,21 +140,21 @@ position = Vector2(-1, 5)
 curve = SubResource("Curve2D_u5whe")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="RobotSpawn/Path2D"]
-position = Vector2(103, 859)
+position = Vector2(103, 861)
 
 [node name="Path2D2" type="Path2D" parent="RobotSpawn"]
 position = Vector2(726, 9)
 curve = SubResource("Curve2D_u5whe")
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="RobotSpawn/Path2D2"]
-position = Vector2(103, 859)
+position = Vector2(103, 861)
 
 [node name="Path2D3" type="Path2D" parent="RobotSpawn"]
 position = Vector2(1394, -81)
 curve = SubResource("Curve2D_u5whe")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="RobotSpawn/Path2D3"]
-position = Vector2(103, 859)
+position = Vector2(103, 861)
 
 [connection signal="body_entered" from="FinishArea" to="." method="_on_finish_area_body_entered"]
 [connection signal="body_entered" from="DeadArea" to="." method="_on_dead_area_body_entered"]

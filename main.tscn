@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bex5t1h6uw3ih"]
+[gd_scene load_steps=11 format=3 uid="uid://bex5t1h6uw3ih"]
 
 [ext_resource type="PackedScene" uid="uid://cnsb34rjr1g3t" path="res://scenes/player/player.tscn" id="1_hcmc4"]
 [ext_resource type="Script" path="res://scenes/street/street.gd" id="1_xfvs2"]
-[ext_resource type="PackedScene" uid="uid://c5v8d3motugo6" path="res://scenes/newspapers/history/0_obj.tscn" id="3_67g01"]
-[ext_resource type="PackedScene" uid="uid://dplinbrdebd0q" path="res://scenes/newspapers/history/1_obj.tscn" id="3_ta7m6"]
 [ext_resource type="PackedScene" uid="uid://64afktx3gtmc" path="res://scenes/newspapers/instructions/how_to_fight.tscn" id="5_8auyv"]
 [ext_resource type="PackedScene" uid="uid://cc0ft21fwyok2" path="res://scenes/templates/base/template.tscn" id="5_sknph"]
 [ext_resource type="PackedScene" uid="uid://bgb65lg11ovb3" path="res://scenes/newspapers/instructions/how_to_move.tscn" id="6_6m6mp"]
@@ -11,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bf0vh7k06vgq8" path="res://scenes/bench/bench.tscn" id="9_ely7f"]
 [ext_resource type="Script" path="res://scenes/ui/heartbar.gd" id="9_fxos5"]
 [ext_resource type="PackedScene" uid="uid://dnfu502mxot8" path="res://scenes/ui/heart.tscn" id="11_4crbq"]
+[ext_resource type="PackedScene" uid="uid://db0xo6v4hphf5" path="res://scenes/intro/intro.tscn" id="12_2np85"]
 
 [node name="Main" type="Node2D"]
 
@@ -23,12 +22,6 @@ script = ExtResource("1_xfvs2")
 
 [node name="Bench" parent="Game/Street/Template" instance=ExtResource("9_ely7f")]
 position = Vector2(1066, 868)
-
-[node name="News3" parent="Game/Street" instance=ExtResource("3_ta7m6")]
-position = Vector2(905, 836)
-
-[node name="News" parent="Game/Street" instance=ExtResource("3_67g01")]
-position = Vector2(392, 832)
 
 [node name="News4" parent="Game/Street" instance=ExtResource("5_8auyv")]
 position = Vector2(1987, 747)
@@ -78,6 +71,8 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="UI" type="Node2D" parent="."]
+
+[node name="Intro" parent="." instance=ExtResource("12_2np85")]
 
 [connection signal="child_entered_tree" from="Game/Street" to="Game/Street" method="_on_child_entered_tree"]
 [connection signal="break_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_break_healing"]

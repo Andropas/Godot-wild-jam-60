@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://deuo1yehn0vbd"]
+
+[ext_resource type="PackedScene" uid="uid://bojj5ifm0rdlj" path="res://scenes/intro/16_26/1.tscn" id="1_lx0lt"]
+
+[node name="Template" instance=ExtResource("1_lx0lt")]
+scale = Vector2(4, 4)
