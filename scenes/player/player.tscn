@@ -285,7 +285,6 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 size = Vector2(139, 46)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-texture_filter = 1
 collision_layer = 2
 script = ExtResource("1_6tx37")
 
@@ -307,6 +306,7 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -79.585)
+limit_left = 0
 limit_top = -155
 limit_bottom = 975
 position_smoothing_speed = 2.0

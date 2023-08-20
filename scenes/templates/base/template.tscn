@@ -53,19 +53,32 @@ collision_mask = 2
 shape = SubResource("SegmentShape2D_ywusl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -4
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -3
 follow_viewport_enabled = true
-follow_viewport_scale = 0.2
+follow_viewport_scale = 0.1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0.670588, 0.545098, 1, 1)
+offset_left = -40770.0
+offset_top = -380.0
+offset_right = -36165.0
+offset_bottom = -252.0
+scale = Vector2(40, 40)
+texture = ExtResource("9_4n8aa")
+stretch_mode = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -4
+follow_viewport_enabled = true
+follow_viewport_scale = 0.05
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
 modulate = Color(0.584314, 0.607843, 1, 1)
-offset_left = -3495.0
-offset_right = -1164.0
-offset_bottom = 134.0
-scale = Vector2(20, 20)
+offset_left = -60280.0
+offset_top = 1140.0
+offset_right = -57949.0
+offset_bottom = 1274.0
+scale = Vector2(80, 80)
 texture = ExtResource("3_fpsju")
 expand_mode = 1
 stretch_mode = 1
@@ -108,12 +121,6 @@ position = Vector2(690, 213)
 scale = Vector2(4, 4)
 texture = ExtResource("3_6ws3s")
 
-[node name="Buildings" type="Sprite2D" parent="Background/Street"]
-modulate = Color(0.764706, 0.6, 1, 1)
-position = Vector2(498, 305)
-scale = Vector2(4, 4)
-texture = ExtResource("9_4n8aa")
-
 [node name="YellowBuilding" type="Sprite2D" parent="Background/Street"]
 modulate = Color(0.545098, 0.623529, 1, 1)
 position = Vector2(297, 290)
@@ -122,7 +129,7 @@ texture = ExtResource("5_b3tdo")
 
 [node name="YellowBuilding2" type="Sprite2D" parent="Background/Street"]
 modulate = Color(0.545098, 0.623529, 1, 1)
-position = Vector2(644, 245)
+position = Vector2(545, 273)
 scale = Vector2(4, 4)
 texture = ExtResource("7_cmkip")
 
