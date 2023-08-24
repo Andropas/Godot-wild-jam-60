@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxvb3ku8ych17"]
+[gd_scene load_steps=8 format=3 uid="uid://cxvb3ku8ych17"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_j26nu"]
 [ext_resource type="Texture2D" uid="uid://tnn13kidiu0l" path="res://textures/menu/Steel Paradise.1 Sprite Sheet.png" id="2_y7jes"]
 [ext_resource type="PackedScene" uid="uid://b48hvjppu4s8j" path="res://SFX/button_press.tscn" id="3_8igdp"]
+[ext_resource type="AudioStream" uid="uid://b12ho31xv2w1k" path="res://Robot City Main Theme 4.2.wav" id="4_pfnoa"]
 
 [sub_resource type="Animation" id="Animation_stspj"]
 length = 0.001
@@ -92,6 +93,10 @@ libraries = {
 }
 
 [node name="ButtonPress" parent="." instance=ExtResource("3_8igdp")]
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pfnoa")
+volume_db = -4.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

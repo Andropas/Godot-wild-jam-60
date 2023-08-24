@@ -38,8 +38,9 @@ position = Vector2(612, 832)
 [node name="Player" parent="Game/Street" instance=ExtResource("1_hcmc4")]
 position = Vector2(254, 778)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Game/Street"]
+[node name="InGameMusic" type="AudioStreamPlayer" parent="Game/Street"]
 stream = ExtResource("9_vp0fs")
+volume_db = -6.0
 
 [node name="GUI" type="CanvasLayer" parent="Game"]
 
@@ -84,5 +85,5 @@ layout_mode = 2
 [connection signal="break_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_break_healing"]
 [connection signal="changed_hp" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_changed_hp"]
 [connection signal="start_healing" from="Game/Street/Player" to="Game/GUI/Control/MarginContainer/HeartsBar" method="_on_player_start_healing"]
-[connection signal="finished" from="Game/Street/AudioStreamPlayer2D" to="Game" method="_on_audio_stream_player_2d_finished"]
+[connection signal="finished" from="Game/Street/InGameMusic" to="Game" method="_on_in_game_music_finished"]
 [connection signal="tree_exited" from="Intro" to="Game" method="_on_intro_tree_exited"]

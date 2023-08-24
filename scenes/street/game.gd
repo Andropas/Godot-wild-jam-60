@@ -2,7 +2,7 @@ extends Node2D
 
 
 @onready var street = $Street
-@onready var audio = $Street/AudioStreamPlayer2D
+@onready var audio = $Street/InGameMusic
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	street.set_process(false)
@@ -18,5 +18,5 @@ func _on_intro_tree_exited():
 	audio.play()
 
 
-func _on_audio_stream_player_2d_finished():
+func _on_in_game_music_finished():
 	audio.play()
